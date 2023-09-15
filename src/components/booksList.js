@@ -15,7 +15,14 @@ function BooksList(props) {
             </thead>
             <tbody>
                 {books ? books.map((book, index) => (
-                    <BookItem key={index} number={book.id} author={book.author} title={book.title} />
+                    <BookItem
+                        key={index}
+                        number={book.id}
+                        author={book.author}
+                        title={book.title}
+                        book={book}
+                        openEditAuthorPopup={props.openEditAuthorPopup}
+                        openEditBookPopup={props.openEditBookPopup} />
                 )) : ''}
             </tbody>
         </table>

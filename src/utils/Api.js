@@ -47,7 +47,13 @@ class Api {
         return this._setApiData(`${this._apiUrl}`, options, 'POST');
     }
 
+    editAuthor(options) {
+        return this._setApiData(`${this._apiUrl}${this.pathToAuthors}${options.authorId}`, options, 'PATCH');
+    }
 
+    editBook(options) {
+        return this._setApiData(`${this._apiUrl}${options.bookId}`, options, 'PATCH');
+    }
 
 }
 

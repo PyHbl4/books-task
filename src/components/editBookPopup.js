@@ -1,17 +1,16 @@
-import { useState } from "react";
-function AddBookPopup(props) {
-    const [authorName, setAuthorName] = useState('');
+import { useState, useEffect } from "react";
+function EditAuthorPopup(props) {
     const [bookTitle, setBookTitle] = useState('');
-    function handleAuthorName(evt) {
-        setAuthorName(evt.target.value);
-    }
+    useEffect(() => {
+        setBookTitle(props.book.title);
+    }, [props.book]);
     function handleBookTitle(evt) {
         setBookTitle(evt.target.value);
     }
     function handleSubmit(evt) {
         evt.preventDefault();
-        props.addBook({
-            author: authorName,
+        props.editBook({
+            bookId: props.book.id,
             title: bookTitle
         });
     }
@@ -23,7 +22,7 @@ function AddBookPopup(props) {
                     <span></span>
                 </button>
                 <form className="form add-book-form" onSubmit={handleSubmit}>
-                    <input type="text" value={authorName} onChange={handleAuthorName} minLength="2" maxLength="50" name="author-name" className="form__input" placeholder="Имя автора" />
+                    <span className="form__label">Название книги</span>
                     <input type="text" value={bookTitle} onChange={handleBookTitle} minLength="2" maxLength="100" name="book-title" className="form__input" placeholder="Название книги" />
                     <button type="submit" className="orange-button form__submit-button"><span className="button-text">Сохранить</span></button>
                 </form>
@@ -32,4 +31,4 @@ function AddBookPopup(props) {
     );
 }
 
-export default AddBookPopup;
+export default EditAuthorPopup;

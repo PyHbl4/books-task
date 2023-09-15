@@ -145,6 +145,7 @@
 .popup.show {
   opacity: 1;
   visibility: visible;
+  z-index: 5;
 }
 
 .popup__wrapper {
@@ -202,6 +203,13 @@
   border-radius: 10px;
   outline: none;
   font-size: 18px;
+}
+
+.form__textarea {
+  resize: vertical;
+  min-height: 200px;
+  max-height: 350px;
+  overflow-y: auto;
 }
 
 .form__submit-button {

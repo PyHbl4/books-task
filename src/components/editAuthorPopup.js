@@ -1,18 +1,23 @@
-import { useState } from "react";
-function AddBookPopup(props) {
+import { useState, useEffect } from "react";
+function EditAuthorPopup(props) {
     const [authorName, setAuthorName] = useState('');
-    const [bookTitle, setBookTitle] = useState('');
+    const [authorBio, setAuthorBio] = useState('');
+    useEffect(() => {
+        setAuthorName(props.book.author);
+        setAuthorBio(props.book.authorBio);
+    }, [props.book]);
     function handleAuthorName(evt) {
         setAuthorName(evt.target.value);
     }
-    function handleBookTitle(evt) {
-        setBookTitle(evt.target.value);
+    function handleAuthorBio(evt) {
+        setAuthorBio(evt.target.value);
     }
     function handleSubmit(evt) {
         evt.preventDefault();
-        props.addBook({
+        props.editAuthor({
+            authorId: props.book.authorStrId,
             author: authorName,
-            title: bookTitle
+            bio: authorBio
         });
     }
     return (
@@ -23,8 +28,10 @@ function AddBookPopup(props) {
                     <span></span>
                 </button>
                 <form className="form add-book-form" onSubmit={handleSubmit}>
+                    <span className="form__label">Имя Автора:</span>
                     <input type="text" value={authorName} onChange={handleAuthorName} minLength="2" maxLength="50" name="author-name" className="form__input" placeholder="Имя автора" />
-                    <input type="text" value={bookTitle} onChange={handleBookTitle} minLength="2" maxLength="100" name="book-title" className="form__input" placeholder="Название книги" />
+                    <span className="form__label">Цитата:</span>
+                    <textarea type="text" value={authorBio} onChange={handleAuthorBio} minLength="2" maxLength="1000" name="author-bio" className="form__input form__textarea" placeholder="Цитата автора" ></textarea>
                     <button type="submit" className="orange-button form__submit-button"><span className="button-text">Сохранить</span></button>
                 </form>
             </div>
@@ -32,4 +39,4 @@ function AddBookPopup(props) {
     );
 }
 
-export default AddBookPopup;
+export default EditAuthorPopup;
